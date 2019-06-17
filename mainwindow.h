@@ -7,6 +7,9 @@
 #include <QDirModel>
 #include <QDesktopServices>
 #include <QList>
+#include "laser_file.h"
+#include <QFile>
+#include <iostream>
 
 namespace Ui {
 class MainWindow;
@@ -26,9 +29,12 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    QList<QString> files_pathe;
-    void processfile(QString path);
+    QList<Laser_file*> files_pathe;
     int num_files=0;
+
+    Laser_file* processfile(QString path);
+    std::string trim(const std::string& str, const std::string& whitespace = " \t");
+    void perform();
 };
 
 #endif // MAINWINDOW_H
