@@ -7,6 +7,15 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    ui->treeWidget->setColumnCount(5);
+    QStringList a={"Material/Thickness","Sheets","Time","Time-120%","Quantity"};
+    ui->treeWidget->setHeaderLabels(a);
+    ui->treeWidget->setColumnWidth(0,200);
+    ui->treeWidget->setColumnWidth(1,180);
+    ui->treeWidget->setColumnWidth(2,180);
+    ui->treeWidget->setColumnWidth(3,200);
+    ui->treeWidget->setColumnWidth(4,30);
+
 }
 
 MainWindow::~MainWindow()
@@ -40,14 +49,11 @@ void MainWindow::openDir()
    {
        //qDebug() << it.next();
        QString temp=it.next();
-       files_pathe.push_back(processfile(temp));
+       file_list.push_back(processfile(temp));
        ui->listWidget->addItem(temp);
        num_files++;
    }
    ui->num_files->display(num_files);
-
-
-
 }
  Laser_file* MainWindow:: processfile(QString path)
  {
@@ -66,7 +72,7 @@ void MainWindow::openDir()
      if(!s1.isEmpty())
         file->count=s1.toInt();
      else
-         file->count=0;
+         file->count=1;
      QFile f(path);
      if(!f.open(QIODevice::ReadOnly)) {
 
@@ -84,11 +90,11 @@ void MainWindow::openDir()
      f.close();
      file->path=file->path.simplified();
      file->material=file->material.simplified();
-     file->thickness=file->thickness.simplified();
+     file->thickness=file->thickness.simplified()+" mm";
      file->sheet_size=file->sheet_size.simplified();
      temp_time=temp_time.simplified();
      file->total_time=QTime::fromString(temp_time, "HH:mm:ss");
-     unsigned long  sec= QTime(0, 0, 0).secsTo(file->total_time);
+     int  sec= QTime(0, 0, 0).secsTo(file->total_time);
      sec-= sec*.2;
      file->time_120=QTime(0, 0, 0).addSecs(sec);
 
@@ -99,7 +105,7 @@ void MainWindow::openDir()
      //std::cout<<sec;
      std::cout<<"\t"<<file->total_time.toString().toStdString();
      std::cout<<"\t"<<file->time_120.toString().toStdString()<<std::endl;
-
+     return file;
  }
  std::string trim(const std::string& str,const std::string& whitespace = " \t")
  {
@@ -112,5 +118,92 @@ void MainWindow::openDir()
      return str.substr(strBegin, strRange);
  }
 
+ void MainWindow::classify()
+ {
+      std::cout<<"number of files :"<<file_list.size()<<std::endl;
+    for (int i=0;i<num_files;i++)
+    {
+        if(( mat_list.find(file_list[i]->material)== mat_list.end()  ) )
+        {
+            std::cout<<"creating new .................."<<std::endl;
+            QHash  <QString , QList <Laser_file*> *> *dim_list=new QHash  <QString,QList <Laser_file*> *> ;
+            if(dim_list==nullptr) std::cout<<"null.................."<<std::endl;
+            QList <Laser_file*> * node_list=new QList <Laser_file*> ;
+            std::cout<<"pushing in file list .................."<<std::endl;
+            node_list->push_back(file_list[i]);
+            std::cout<<"pushing in list in thickness list .................."<<std::endl;
+            std::cout<<node_list->size()<<std::endl;
+            dim_list->insert(file_list[i]->thickness,node_list);
+            std::cout<<"pushing in thickness in material list .................."<<std::endl;
+            mat_list.insert(file_list[i]->material,dim_list);
+
+        }
+        else if (mat_list.value(file_list[i]->material)->find(file_list[i]->thickness) == mat_list.value(file_list[i]->material)->end() )
+        {
+            QList <Laser_file*> * node_list=new QList <Laser_file*> ;
+            node_list->push_back(file_list[i]);
+            mat_list.value(file_list[i]->material)->insert(file_list[i]->thickness,node_list);
+        }
+        else
+        {
+          mat_list.value(file_list[i]->material)->value(file_list[i]->thickness)->push_back(file_list[i]);
+          std::cout<<"added  .................."<<std::endl;
+        }
+    }
+
+ }
 
 
+
+
+void MainWindow::on_pushButton_2_clicked()
+{
+    std::cout<<"trying to classifying data......."<<std::endl;
+    classify();
+    std::cout<<"data classified......."<<std::endl;
+    std::cout<<"......................................................................"<<std::endl;
+    std::cout<<"......................................................................"<<std::endl;
+    std::cout<<"......................................................................"<<std::endl;
+    std::cout<<"......................................................................"<<std::endl;
+    std::cout<<"material size...................."<<mat_list.size()<< std::endl;
+    for(auto i=mat_list.begin();i !=mat_list.end();++i)
+    {
+        std::cout<<i.key().toStdString()<<".........................."<<i.value()->size()<< std::endl;
+        for(auto j=i.value()->begin();j!=i.value()->end();++j)
+        {
+             std::cout<<j.key().toStdString()<<".........................."<<j.value()->size()<< std::endl;
+            for(auto k=j.value()->begin();k!=j.value()->end();++k)
+            {
+                Laser_file * f=*k;
+                std::cout<<f->material.toStdString()<<"\t";
+                std::cout<<f->thickness.toStdString()<<"\t";
+                std::cout<<f->total_time.toString().toStdString()<<"\t";
+                std::cout<<f->time_120.toString().toStdString()<<"\t";
+                std::cout<<f->count<<std::endl;
+            }
+        }
+       addTreeRoot(i.key(),i.value());
+    }
+}
+void MainWindow::addTreeRoot(QString name,QHash <QString, QList<Laser_file *> *>* dim_list)
+{
+    // QTreeWidgetItem(QTreeWidget * parent, int type = Type)
+    QTreeWidgetItem *treeItem = new QTreeWidgetItem(ui->treeWidget);
+
+    // QTreeWidgetItem::setText(int column, const QString & text)
+    treeItem->setText(0, name);
+    for(auto i=dim_list->begin();i!=dim_list->end();++i)
+        addTreeChild(treeItem,i.value());
+}
+
+void MainWindow::addTreeChild(QTreeWidgetItem *parent,QList<Laser_file *> *list)
+{   // QTreeWidgetItem(QTreeWidget * parent, int type = Type)
+    // QTreeWidgetItem(QTreeWidget * parent, int type = Type)
+    QTreeWidgetItem *treeItem = new QTreeWidgetItem(ui->treeWidget);
+
+    // QTreeWidgetItem::setText(int column, const QString & text)
+    treeItem->setText(0 , );
+    for(auto i=list->begin();i!=list->end();++i)
+        addTreeChild1(treeItem,*i);
+    parent->addChild(treeItem);
+}

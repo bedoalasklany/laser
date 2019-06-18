@@ -93,15 +93,49 @@
      <widget class="QTreeWidget" name="treeWidget">
       <property name="geometry">
        <rect>
-        <x>20</x>
-        <y>60</y>
-        <width>181</width>
-        <height>391</height>
+        <x>10</x>
+        <y>20</y>
+        <width>991</width>
+        <height>431</height>
        </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Sakkal Majalla</family>
+        <pointsize>20</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="wordWrap">
+       <bool>true</bool>
+      </property>
+      <property name="columnCount">
+       <number>5</number>
       </property>
       <column>
        <property name="text">
         <string notr="true">1</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string notr="true">2</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string notr="true">3</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string notr="true">4</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string notr="true">5</string>
        </property>
       </column>
      </widget>
@@ -123,11 +157,24 @@
    <widget class="QLCDNumber" name="num_files">
     <property name="geometry">
      <rect>
-      <x>180</x>
+      <x>350</x>
       <y>30</y>
       <width>151</width>
       <height>61</height>
      </rect>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_2">
+    <property name="geometry">
+     <rect>
+      <x>130</x>
+      <y>40</y>
+      <width>75</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Classify</string>
     </property>
    </widget>
   </widget>
