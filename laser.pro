@@ -5,6 +5,7 @@
 #-------------------------------------------------
 
 QT       += core gui
+QT       +=sql
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -27,11 +28,13 @@ CONFIG += c++11
 SOURCES += \
         laser_file.cpp \
         main.cpp \
-        mainwindow.cpp
+        mainwindow.cpp \
+        mtime.cpp
 
 HEADERS += \
         laser_file.h \
-        mainwindow.h
+        mainwindow.h \
+        mtime.h
 
 FORMS += \
         mainwindow.ui

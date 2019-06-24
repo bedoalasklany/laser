@@ -4,12 +4,11 @@
 {
    this->material=material;
    this->path=path;
-     this->thickness=thickness;
+    this->thickness=thickness;
    this->count=count;
    this->sheet_size=sheet;
-   this->total_time=total_time;
 }
 Laser_file::Laser_file()
 {
-
+  count=1;
 }

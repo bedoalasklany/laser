@@ -2,6 +2,7 @@
 #define LASER_FILE_H
 #include <QtCore>
 #include <QTime>
+#include "mtime.h"
 
 class Laser_file
 {
@@ -13,7 +14,7 @@ public:
     QString thickness;
     int count;
     QString sheet_size;
-    QTime total_time,time_120;
+    MTime total_time,time_120;
 
 };
 

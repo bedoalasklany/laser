@@ -2,20 +2,20 @@
 #include "ui_mainwindow.h"
 
 
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    ui->treeWidget->setColumnCount(5);
-    QStringList a={"Material/Thickness","Sheets","Time","Time-120%","Quantity"};
-    ui->treeWidget->setHeaderLabels(a);
-    ui->treeWidget->setColumnWidth(0,200);
-    ui->treeWidget->setColumnWidth(1,180);
-    ui->treeWidget->setColumnWidth(2,180);
-    ui->treeWidget->setColumnWidth(3,200);
-    ui->treeWidget->setColumnWidth(4,30);
 
+    QStringList a={"Sheets","Time","Time-120%","Quantity"};
+    ui->tableWidget->setColumnCount(4);
+    ui->tableWidget->setHorizontalHeaderLabels(a);
+    ui->tableWidget->setColumnWidth(0,150);
+    ui->tableWidget->setColumnWidth(1,150);
+    ui->tableWidget->setColumnWidth(2,150);
+    ui->tableWidget->setColumnWidth(3,120);
 }
 
 MainWindow::~MainWindow()
@@ -53,7 +53,7 @@ void MainWindow::openDir()
        ui->listWidget->addItem(temp);
        num_files++;
    }
-   ui->num_files->display(num_files);
+   ui->num_files->display((int)num_files);
 }
  Laser_file* MainWindow:: processfile(QString path)
  {
@@ -73,6 +73,7 @@ void MainWindow::openDir()
         file->count=s1.toInt();
      else
          file->count=1;
+     if(file->count==0) file->count=1;
      QFile f(path);
      if(!f.open(QIODevice::ReadOnly)) {
 
@@ -93,10 +94,12 @@ void MainWindow::openDir()
      file->thickness=file->thickness.simplified()+" mm";
      file->sheet_size=file->sheet_size.simplified();
      temp_time=temp_time.simplified();
-     file->total_time=QTime::fromString(temp_time, "HH:mm:ss");
-     int  sec= QTime(0, 0, 0).secsTo(file->total_time);
-     sec-= sec*.2;
-     file->time_120=QTime(0, 0, 0).addSecs(sec);
+     MTime m;
+     file->total_time.fromstring(temp_time);
+     unsigned long long   sec= file->total_time.toSec() * file->count ;
+     file->total_time.fromSec(sec);
+     sec*=.8;
+     file->time_120.fromSec(sec);
 
      //std::cout<<file->path.toStdString();
      std::cout<<"\t"<<file->material.toStdString();
@@ -121,7 +124,7 @@ void MainWindow::openDir()
  void MainWindow::classify()
  {
       std::cout<<"number of files :"<<file_list.size()<<std::endl;
-    for (int i=0;i<num_files;i++)
+    for ( int  i=0;i<((int)num_files);i++)
     {
         if(( mat_list.find(file_list[i]->material)== mat_list.end()  ) )
         {
@@ -169,6 +172,7 @@ void MainWindow::on_pushButton_2_clicked()
     for(auto i=mat_list.begin();i !=mat_list.end();++i)
     {
         std::cout<<i.key().toStdString()<<".........................."<<i.value()->size()<< std::endl;
+        ui->mat_list->addItem(i.key());
         for(auto j=i.value()->begin();j!=i.value()->end();++j)
         {
              std::cout<<j.key().toStdString()<<".........................."<<j.value()->size()<< std::endl;
@@ -182,28 +186,237 @@ void MainWindow::on_pushButton_2_clicked()
                 std::cout<<f->count<<std::endl;
             }
         }
-       addTreeRoot(i.key(),i.value());
+
     }
+
+    ui->t_sheets->setText( sum_sheets());
+    ui->t_time->setText(sum_time());
+    ui->t_time120->setText( sum_time120());
+
+
+
+
+
 }
-void MainWindow::addTreeRoot(QString name,QHash <QString, QList<Laser_file *> *>* dim_list)
+
+
+void MainWindow::on_mat_list_itemPressed(QListWidgetItem *item)
 {
-    // QTreeWidgetItem(QTreeWidget * parent, int type = Type)
-    QTreeWidgetItem *treeItem = new QTreeWidgetItem(ui->treeWidget);
 
-    // QTreeWidgetItem::setText(int column, const QString & text)
-    treeItem->setText(0, name);
-    for(auto i=dim_list->begin();i!=dim_list->end();++i)
-        addTreeChild(treeItem,i.value());
+  ui->thick_list->clear();
+  QString s=item->text();
+ QHash<QString,QList <Laser_file*> *> *temp=mat_list.value(s);
+
+  for (auto i=temp->begin();i!=temp->end();++i)
+  {
+        ui->thick_list->addItem(i.key());
+  }
+  unsigned long long tempmx;
+  ui->mat_sheetes->setText( sum_sheets_mat(s));
+  ui->mat_time->setText(sum_time_mat(s,tempmx));
+  ui->mat_time120->setText( sum_time120_mat(s,tempmx));
+
+
+
 }
 
-void MainWindow::addTreeChild(QTreeWidgetItem *parent,QList<Laser_file *> *list)
-{   // QTreeWidgetItem(QTreeWidget * parent, int type = Type)
-    // QTreeWidgetItem(QTreeWidget * parent, int type = Type)
-    QTreeWidgetItem *treeItem = new QTreeWidgetItem(ui->treeWidget);
+void MainWindow::on_thick_list_itemPressed(QListWidgetItem *item)
+{
 
-    // QTreeWidgetItem::setText(int column, const QString & text)
-    treeItem->setText(0 , );
-    for(auto i=list->begin();i!=list->end();++i)
-        addTreeChild1(treeItem,*i);
-    parent->addChild(treeItem);
+    QString s1=ui->mat_list->selectedItems().first()->text();
+    QHash<QString,QList <Laser_file*> *> *temp1=mat_list.value(s1);
+    QString s2=item->text();
+    QList <Laser_file*> *temp2=temp1->value(s2);
+    int row=0;
+    ui->tableWidget->clear();
+    QStringList a={"Sheets","Time","Time-120%","Quantity"};
+    ui->tableWidget->setColumnCount(4);
+    ui->tableWidget->setHorizontalHeaderLabels(a);
+    ui->tableWidget->setColumnWidth(0,150);
+    ui->tableWidget->setColumnWidth(1,150);
+    ui->tableWidget->setColumnWidth(2,150);
+    ui->tableWidget->setColumnWidth(3,120);
+    ui->tableWidget->setRowCount(0);
+    for(auto j=(temp2)->begin();j !=(temp2)->end(); ++j)
+    {
+        ui->tableWidget->insertRow(row);
+        ui->tableWidget->setItem(row,0,new QTableWidgetItem((*j)->sheet_size));
+        ui->tableWidget->setItem(row,1,new QTableWidgetItem((*j)->total_time.toString()));
+        ui->tableWidget->setItem(row,2,new QTableWidgetItem((*j)->time_120.toString()));
+        ui->tableWidget->setItem(row,3,new QTableWidgetItem(QString::number((*j)->count)));
+        row++;
+
+    }
+    unsigned long long tempmx;
+     ui->thick_t_sheetes->setText( sum_sheets_list(s1,s2));
+     ui->thick_t_total_time->setText(sum_time_list(s1,s2,tempmx));
+     ui->thick_t_time120->setText( sum_time120_list(s1,s2,tempmx));
+
+
+
+    /* std::cout<<sum_sheets_list(s1,s2).toStdString()<<"\t";
+     std::cout<<sum_time_list(s1,s2).toStdString()<<"\t";
+     std::cout<<sum_time120_list(s1,s2).toStdString()<<std::endl;*/
+
+
 }
+
+QString MainWindow::sum_sheets_list(QString material, QString thick)
+{
+    unsigned long long  sum=0;
+   for(auto i= mat_list.value(material)->value(thick)->begin();i != mat_list.value(material)->value(thick)->end();++i )
+   {
+       sum += 1 * (*i)->count;
+   }
+
+   return QString::number(sum);
+}
+QString MainWindow::sum_time_list(QString material, QString thick, unsigned long long &sec)
+{
+  unsigned long long   time=0;
+  MTime m;
+  for(auto i= mat_list.value(material)->value(thick)->begin();i != mat_list.value(material)->value(thick)->end();++i )
+  {
+      time += (*i)->total_time.toSec();
+  }
+  sec=time;
+  m.fromSec(time);
+  return
+          m.toString();
+}
+QString MainWindow::sum_time120_list(QString material, QString thick, unsigned long long &sec)
+{
+    unsigned long long   time=0;
+    MTime m;
+    for(auto i= mat_list.value(material)->value(thick)->begin();i != mat_list.value(material)->value(thick)->end();++i )
+    {
+        time += (*i)->time_120.toSec();
+    }
+    sec=time;
+    m.fromSec(time);
+    return
+            m.toString();
+}
+
+
+QString MainWindow::sum_sheets_mat(QString material)
+{
+   int sum=0;
+
+   for(auto i= mat_list.value(material)->begin();i != mat_list.value(material)->end();++i )
+   {
+     sum+= sum_sheets_list(material,i.key()).toInt();
+   }
+
+   return QString::number(sum);
+}
+QString MainWindow::sum_time_mat(QString material, unsigned long long &sec)
+{
+  unsigned long long  time=0,sec_in;
+  MTime m;
+  for(auto i= mat_list.value(material)->begin();i != mat_list.value(material)->end();++i )  {
+      sum_time_list(material,i.key(),sec_in);
+      time +=sec_in;
+  }
+   sec=time;
+   m.fromSec(time);
+  return
+          m.toString();
+}
+QString MainWindow::sum_time120_mat(QString material, unsigned long long &sec)
+{
+    unsigned long long  time=0,sec_in;
+    MTime m;
+  for(auto i= mat_list.value(material)->begin();i != mat_list.value(material)->end();++i )  {
+      sum_time120_list(material,i.key(),sec_in);
+      time +=sec_in;
+  }
+ sec=time;
+  m.fromSec(time);
+ return
+         m.toString();
+}
+
+
+QString MainWindow::sum_sheets()
+{
+    int sum=0;
+ for(auto i=mat_list.begin();i!= mat_list.end();++i)
+ {
+   sum+=sum_sheets_mat(i.key()).toInt();
+ }
+ return  QString::number(sum);
+}
+
+QString MainWindow::sum_time()
+{
+    unsigned long long  time=0,sec_in;
+    MTime m;
+ for(auto i=mat_list.begin();i!= mat_list.end();++i)
+ {
+     sum_time_mat(i.key(),sec_in);
+     time +=sec_in;
+ }
+
+ m.fromSec(time);
+return
+        m.toString();
+}
+
+QString MainWindow::sum_time120()
+{
+    unsigned long long  time=0,sec_in;
+    MTime m;
+ for(auto i=mat_list.begin();i!= mat_list.end();++i)
+ {
+     sum_time120_mat(i.key(),sec_in);
+     time +=sec_in;
+
+ }
+ m.fromSec(time);
+return
+        m.toString();
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
