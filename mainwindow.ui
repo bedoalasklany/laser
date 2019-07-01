@@ -13,31 +13,73 @@
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">QMainWindow
+{
+ background-color: rgb(66, 66, 80);
+}</string>
+  </property>
   <widget class="QWidget" name="centralWidget">
    <widget class="QPushButton" name="pushButton">
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>0</y>
+      <y>20</y>
       <width>75</width>
       <height>81</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton#pushButton:pressed {
+ border:2px solid;;
+ border-radius:25px;
+	border-color: rgb(255, 255, 127);
+	
+background-color:qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0 rgba(255, 255, 255, 255), stop:0.1 rgba(255, 255, 255, 255), stop:0.2 rgba(77, 255, 120, 167), stop:0.3 rgba(64, 255, 61, 92), stop:0.397727 rgba(25, 255, 119, 51), stop:0.5 rgba(18, 255, 165, 205), stop:0.52 rgba(7, 255, 14, 205), stop:0.6 rgba(0, 255, 82, 255), stop:1 rgba(255, 255, 255, 0))
+
+}
+QPushButton{
+background-color: rgb(66, 66, 80);
+
+border:none;
+}
+</string>
+    </property>
     <property name="text">
-     <string>ADD</string>
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset resource="res.qrc">
+      <normaloff>:/res/new.png</normaloff>:/res/new.png</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>64</width>
+      <height>64</height>
+     </size>
     </property>
    </widget>
    <widget class="QTabWidget" name="tabWidget">
     <property name="geometry">
      <rect>
-      <x>0</x>
-      <y>120</y>
-      <width>1011</width>
-      <height>481</height>
+      <x>10</x>
+      <y>110</y>
+      <width>1001</width>
+      <height>491</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Eras Demi ITC</family>
+      <pointsize>16</pointsize>
+     </font>
     </property>
     <property name="autoFillBackground">
      <bool>false</bool>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-color: rgb(255, 65, 129);
+background-color: rgb(51, 51, 61);</string>
     </property>
     <property name="tabPosition">
      <enum>QTabWidget::North</enum>
@@ -65,269 +107,930 @@
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
-      <string>Tab 1</string>
+      <string>Files</string>
      </attribute>
-     <widget class="QWidget" name="horizontalLayoutWidget">
-      <property name="geometry">
-       <rect>
-        <x>0</x>
-        <y>40</y>
-        <width>1001</width>
-        <height>421</height>
-       </rect>
-      </property>
-      <layout class="QHBoxLayout" name="horizontalLayout">
-       <item>
-        <widget class="QTreeView" name="treeView"/>
-       </item>
-       <item>
-        <widget class="QListWidget" name="listWidget"/>
-       </item>
-      </layout>
-     </widget>
-    </widget>
-    <widget class="QWidget" name="tab_2">
-     <attribute name="title">
-      <string>Tab 2</string>
-     </attribute>
-     <widget class="QListWidget" name="mat_list">
+     <widget class="QTreeView" name="treeView">
       <property name="geometry">
        <rect>
         <x>10</x>
         <y>10</y>
-        <width>181</width>
-        <height>181</height>
+        <width>441</width>
+        <height>151</height>
        </rect>
       </property>
+      <property name="styleSheet">
+       <string notr="true">border: 1px solid ;
+border-color:  rgb(255, 65, 129);
+  color:#FFDC78;</string>
+      </property>
      </widget>
-     <widget class="QTableWidget" name="tableWidget">
+     <widget class="QListWidget" name="listWidget">
       <property name="geometry">
        <rect>
-        <x>410</x>
+        <x>460</x>
         <y>10</y>
-        <width>591</width>
-        <height>401</height>
+        <width>531</width>
+        <height>431</height>
        </rect>
       </property>
-     </widget>
-     <widget class="QListWidget" name="thick_list">
-      <property name="geometry">
-       <rect>
-        <x>230</x>
-        <y>10</y>
-        <width>141</width>
-        <height>181</height>
-       </rect>
+      <property name="styleSheet">
+       <string notr="true">border: 1px solid ;
+border-color:  rgb(255, 65, 129);
+  color:#FFDC78;</string>
       </property>
      </widget>
-     <widget class="QLabel" name="thick_t_sheetes">
+     <widget class="QLabel" name="label_11">
       <property name="geometry">
        <rect>
-        <x>270</x>
-        <y>220</y>
-        <width>101</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>14</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>0</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="thick_t_total_time">
-      <property name="geometry">
-       <rect>
-        <x>270</x>
-        <y>260</y>
-        <width>101</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>14</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>0</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="thick_t_time120">
-      <property name="geometry">
-       <rect>
-        <x>270</x>
-        <y>300</y>
-        <width>101</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>14</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>0</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="mat_sheetes">
-      <property name="geometry">
-       <rect>
-        <x>30</x>
-        <y>230</y>
-        <width>101</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>14</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>0</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="mat_time">
-      <property name="geometry">
-       <rect>
-        <x>30</x>
-        <y>270</y>
+        <x>10</x>
+        <y>190</y>
         <width>111</width>
-        <height>16</height>
+        <height>20</height>
        </rect>
       </property>
       <property name="font">
        <font>
+        <family>Arial Narrow</family>
         <pointsize>14</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
        </font>
       </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(255, 255, 255);</string>
+      </property>
       <property name="text">
-       <string>0</string>
+       <string>Project Name:</string>
       </property>
      </widget>
-     <widget class="QLabel" name="mat_time120">
+     <widget class="QTreeView" name="treeView_2">
       <property name="geometry">
        <rect>
-        <x>30</x>
-        <y>310</y>
-        <width>91</width>
-        <height>21</height>
+        <x>10</x>
+        <y>250</y>
+        <width>441</width>
+        <height>191</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">border: 1px solid ;
+border-color: #1EB980;
+  color:#FFDC78;</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_4">
+      <property name="geometry">
+       <rect>
+        <x>370</x>
+        <y>165</y>
+        <width>81</width>
+        <height>81</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton#pushButton_4:pressed {
+ border:2px solid;;
+ border-radius:25px;
+border-color: rgb(255, 255, 127);
+	
+background-color:qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0 rgba(255, 255, 255, 255), stop:0.1 rgba(255, 255, 255, 255), stop:0.2 rgba(77, 255, 120, 167), stop:0.3 rgba(64, 255, 61, 92), stop:0.397727 rgba(25, 255, 119, 51), stop:0.5 rgba(18, 255, 165, 205), stop:0.52 rgba(7, 255, 14, 205), stop:0.6 rgba(0, 255, 82, 255), stop:1 rgba(255, 255, 255, 0))
+
+}
+QPushButton{
+background-color: rgb(51, 51, 61);
+
+border:none;
+}
+</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset resource="res.qrc">
+        <normaloff>:/res/ok.png</normaloff>:/res/ok.png</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>64</width>
+        <height>64</height>
+       </size>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="proj_name_edit">
+      <property name="geometry">
+       <rect>
+        <x>120</x>
+        <y>180</y>
+        <width>241</width>
+        <height>41</height>
        </rect>
       </property>
       <property name="font">
        <font>
-        <pointsize>14</pointsize>
+        <family>Bahnschrift</family>
+        <pointsize>16</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
        </font>
       </property>
-      <property name="text">
-       <string>0</string>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(4, 185, 127);
+border : 0px solid blue;
+border-top : 0px solid red;
+border-left : 0px solid red;
+border-right : 0px solid red;
+border-bottom : 2px solid rgb(255, 255, 127);</string>
       </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+     <zorder>listWidget</zorder>
+     <zorder>label_11</zorder>
+     <zorder>pushButton_4</zorder>
+     <zorder>treeView</zorder>
+     <zorder>treeView_2</zorder>
+     <zorder>proj_name_edit</zorder>
+    </widget>
+    <widget class="QWidget" name="tab_2">
+     <attribute name="title">
+      <string>Info</string>
+     </attribute>
+     <widget class="QGroupBox" name="groupBox_3">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>981</width>
+        <height>441</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QGroupBox{
+border: 1px solid ;
+border-color:  #1EB980;
+color: rgb(255, 220, 120);
+}</string>
+      </property>
+      <property name="title">
+       <string>Material</string>
+      </property>
+      <widget class="QListWidget" name="mat_list">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>20</y>
+         <width>171</width>
+         <height>151</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>Agency FB</family>
+         <pointsize>16</pointsize>
+         <weight>50</weight>
+         <italic>false</italic>
+         <bold>false</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">border: 1px solid ;
+font: 16pt &quot;Agency FB&quot;;
+border-color:  #1EB980;
+color:#FFDC78;</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="mat_time120">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>370</y>
+         <width>120</width>
+         <height>40</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>Seven Segment</family>
+         <pointsize>18</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: #FFFFFF;</string>
+       </property>
+       <property name="text">
+        <string>0</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_4">
+       <property name="geometry">
+        <rect>
+         <x>40</x>
+         <y>200</y>
+         <width>91</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>14</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">
+color: rgb(255, 220, 120);</string>
+       </property>
+       <property name="text">
+        <string>Sheetes</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_6">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>340</y>
+         <width>151</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>14</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: rgb(255, 220, 120);</string>
+       </property>
+       <property name="text">
+        <string>Time - 120 %</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+      <widget class="QLabel" name="mat_time">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>300</y>
+         <width>120</width>
+         <height>40</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>Seven Segment</family>
+         <pointsize>18</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: #FFFFFF;</string>
+       </property>
+       <property name="text">
+        <string>0</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+      <widget class="QLabel" name="mat_sheetes">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>230</y>
+         <width>120</width>
+         <height>40</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>Seven Segment</family>
+         <pointsize>18</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: #FFFFFF;</string>
+       </property>
+       <property name="text">
+        <string>0</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_5">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>270</y>
+         <width>111</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>14</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: rgb(255, 220, 120);</string>
+       </property>
+       <property name="text">
+        <string>Time</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+      <widget class="QGroupBox" name="groupBox_2">
+       <property name="geometry">
+        <rect>
+         <x>190</x>
+         <y>20</y>
+         <width>781</width>
+         <height>411</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QGroupBox{
+border: 1px solid ;
+border-color:  rgb(255, 65, 129);
+	color: rgb(255, 105, 81);
+}</string>
+       </property>
+       <property name="title">
+        <string>Thickness</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+       </property>
+       <property name="flat">
+        <bool>false</bool>
+       </property>
+       <widget class="QListWidget" name="thick_list">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>20</y>
+          <width>141</width>
+          <height>171</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Agency FB</family>
+          <pointsize>16</pointsize>
+          <weight>50</weight>
+          <italic>false</italic>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">border: 1px solid ;
+font: 16pt &quot;Agency FB&quot;;
+border-color:  rgb(255, 65, 129);
+color:#FFDC78;</string>
+        </property>
+       </widget>
+       <widget class="QTableWidget" name="tableWidget">
+        <property name="geometry">
+         <rect>
+          <x>190</x>
+          <y>10</y>
+          <width>581</width>
+          <height>391</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">
+QHeaderView::section {
+    color: rgb(0, 93, 87);
+    font: 75 14pt &quot;Bell MT&quot;;;
+     border :none
+};
+
+  border: 1px solid ;
+  
+border-color:#8933C9;
+  color:#FFDC78;
+  text-align: center;
+
+font: 16pt &quot;Seven Segment&quot;;
+
+
+</string>
+        </property>
+        <property name="selectionBehavior">
+         <enum>QAbstractItemView::SelectColumns</enum>
+        </property>
+        <attribute name="verticalHeaderVisible">
+         <bool>false</bool>
+        </attribute>
+       </widget>
+       <widget class="QLabel" name="thick_t_time120">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>370</y>
+          <width>161</width>
+          <height>40</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Seven Segment</family>
+          <pointsize>18</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color: #FFFFFF;</string>
+        </property>
+        <property name="text">
+         <string>0</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+       <widget class="QLabel" name="thick_t_total_time">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>300</y>
+          <width>161</width>
+          <height>40</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Seven Segment</family>
+          <pointsize>18</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color: #FFFFFF;</string>
+        </property>
+        <property name="text">
+         <string>0</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+       <widget class="QLabel" name="thick_t_sheetes">
+        <property name="geometry">
+         <rect>
+          <x>9</x>
+          <y>230</y>
+          <width>161</width>
+          <height>40</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Seven Segment</family>
+          <pointsize>18</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color:#FFFFFF;</string>
+        </property>
+        <property name="text">
+         <string>0</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label">
+        <property name="geometry">
+         <rect>
+          <x>50</x>
+          <y>200</y>
+          <width>91</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>14</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color: rgb(255, 105, 81);</string>
+        </property>
+        <property name="text">
+         <string>Sheetes</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_2">
+        <property name="geometry">
+         <rect>
+          <x>50</x>
+          <y>270</y>
+          <width>91</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>14</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color: rgb(255, 105, 81);</string>
+        </property>
+        <property name="text">
+         <string>Time</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_3">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>340</y>
+          <width>151</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>14</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color: rgb(255, 105, 81);</string>
+        </property>
+        <property name="text">
+         <string>Time - 120 %</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </widget>
      </widget>
     </widget>
-   </widget>
-   <widget class="QLCDNumber" name="num_files">
-    <property name="geometry">
-     <rect>
-      <x>520</x>
-      <y>20</y>
-      <width>151</width>
-      <height>61</height>
-     </rect>
-    </property>
    </widget>
    <widget class="QPushButton" name="pushButton_2">
     <property name="geometry">
      <rect>
       <x>94</x>
-      <y>0</y>
+      <y>20</y>
       <width>81</width>
       <height>81</height>
      </rect>
     </property>
-    <property name="text">
-     <string>Classify</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="t_sheets">
-    <property name="geometry">
-     <rect>
-      <x>870</x>
-      <y>10</y>
-      <width>121</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>14</pointsize>
-     </font>
+    <property name="styleSheet">
+     <string notr="true">QPushButton#pushButton_2:pressed {
+ border:2px solid;;
+ border-radius:25px;
+ border-color: rgb(255, 255, 127);
+	
+background-color:qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0 rgba(255, 255, 255, 255), stop:0.1 rgba(255, 255, 255, 255), stop:0.2 rgba(77, 255, 120, 167), stop:0.3 rgba(64, 255, 61, 92), stop:0.397727 rgba(25, 255, 119, 51), stop:0.5 rgba(18, 255, 165, 205), stop:0.52 rgba(7, 255, 14, 205), stop:0.6 rgba(0, 255, 82, 255), stop:1 rgba(255, 255, 255, 0))
+
+}
+QPushButton{
+background-color: rgb(66, 66, 80);
+
+border:none;
+}</string>
     </property>
     <property name="text">
-     <string>0</string>
+     <string/>
     </property>
-   </widget>
-   <widget class="QLabel" name="t_time">
-    <property name="geometry">
-     <rect>
-      <x>870</x>
-      <y>40</y>
-      <width>121</width>
-      <height>31</height>
-     </rect>
+    <property name="icon">
+     <iconset resource="res.qrc">
+      <normaloff>:/res/classify_init.png</normaloff>:/res/classify_init.png</iconset>
     </property>
-    <property name="font">
-     <font>
-      <pointsize>14</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>0</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="t_time120">
-    <property name="geometry">
-     <rect>
-      <x>870</x>
-      <y>70</y>
-      <width>121</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>14</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>0</string>
+    <property name="iconSize">
+     <size>
+      <width>64</width>
+      <height>64</height>
+     </size>
     </property>
    </widget>
    <widget class="QPushButton" name="pushButton_3">
     <property name="geometry">
      <rect>
       <x>180</x>
-      <y>0</y>
+      <y>20</y>
       <width>81</width>
       <height>81</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton#pushButton_3:pressed {
+ border:2px solid;;
+ border-radius:25px;
+	border-color: rgb(255, 255, 127);
+	
+background-color:qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0 rgba(255, 255, 255, 255), stop:0.1 rgba(255, 255, 255, 255), stop:0.2 rgba(77, 255, 120, 167), stop:0.3 rgba(64, 255, 61, 92), stop:0.397727 rgba(25, 255, 119, 51), stop:0.5 rgba(18, 255, 165, 205), stop:0.52 rgba(7, 255, 14, 205), stop:0.6 rgba(0, 255, 82, 255), stop:1 rgba(255, 255, 255, 0))
+
+}
+QPushButton{
+background-color: rgb(66, 66, 80);
+
+border:none;
+}</string>
+    </property>
     <property name="text">
-     <string>Print</string>
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset resource="res.qrc">
+      <normaloff>:/res/print.png</normaloff>:/res/print.png</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>64</width>
+      <height>64</height>
+     </size>
     </property>
    </widget>
-  </widget>
-  <widget class="QToolBar" name="mainToolBar">
-   <attribute name="toolBarArea">
-    <enum>TopToolBarArea</enum>
-   </attribute>
-   <attribute name="toolBarBreak">
-    <bool>false</bool>
-   </attribute>
+   <widget class="QGroupBox" name="groupBox">
+    <property name="geometry">
+     <rect>
+      <x>520</x>
+      <y>5</y>
+      <width>471</width>
+      <height>101</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border: 1px solid ;
+border-color:  rgb(255, 65, 129);
+</string>
+    </property>
+    <property name="title">
+     <string/>
+    </property>
+    <widget class="QLabel" name="t_sheets">
+     <property name="geometry">
+      <rect>
+       <x>340</x>
+       <y>5</y>
+       <width>120</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Seven Segment</family>
+       <pointsize>18</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color:#FFFFFF;
+border : none</string>
+     </property>
+     <property name="text">
+      <string>0</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="t_time">
+     <property name="geometry">
+      <rect>
+       <x>340</x>
+       <y>35</y>
+       <width>120</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Seven Segment</family>
+       <pointsize>18</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: #FFFFFF;
+border: none;</string>
+     </property>
+     <property name="text">
+      <string>0</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="t_time120">
+     <property name="geometry">
+      <rect>
+       <x>340</x>
+       <y>65</y>
+       <width>120</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Seven Segment</family>
+       <pointsize>18</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color:#FFFFFF;
+border: none;</string>
+     </property>
+     <property name="text">
+      <string>0</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_7">
+     <property name="geometry">
+      <rect>
+       <x>170</x>
+       <y>10</y>
+       <width>131</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>14</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border :none;
+color: rgb(4, 185, 127);
+</string>
+     </property>
+     <property name="text">
+      <string>Sheetes</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_8">
+     <property name="geometry">
+      <rect>
+       <x>170</x>
+       <y>40</y>
+       <width>131</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>14</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(4, 185, 127);
+border :none;</string>
+     </property>
+     <property name="text">
+      <string>Time</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_9">
+     <property name="geometry">
+      <rect>
+       <x>170</x>
+       <y>70</y>
+       <width>131</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>14</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(4, 185, 127);
+border :none;</string>
+     </property>
+     <property name="text">
+      <string>Time - 120 %</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_10">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>0</y>
+       <width>141</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>16</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border :none;
+color: rgb(4, 185, 127);</string>
+     </property>
+     <property name="text">
+      <string>Files</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QLCDNumber" name="num_files">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>30</y>
+       <width>151</width>
+       <height>61</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 65, 129);
+text-align: center;
+border :none;</string>
+     </property>
+     <property name="lineWidth">
+      <number>7</number>
+     </property>
+     <property name="smallDecimalPoint">
+      <bool>false</bool>
+     </property>
+     <property name="segmentStyle">
+      <enum>QLCDNumber::Filled</enum>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QLabel" name="label_12">
+    <property name="geometry">
+     <rect>
+      <x>270</x>
+      <y>19</y>
+      <width>241</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Rockwell Condensed</family>
+      <pointsize>26</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(4, 185, 127);
+border : 0px solid blue;
+border-top : 0px solid red;
+border-left : 0px solid red;
+border-right : 0px solid red;
+border-bottom : 2px solid rgb(255, 255, 127);</string>
+    </property>
+    <property name="text">
+     <string>No Projects</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QProgressBar" name="progressBar">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>600</y>
+      <width>1001</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="value">
+     <number>24</number>
+    </property>
+    <property name="textVisible">
+     <bool>false</bool>
+    </property>
+   </widget>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <widget class="QMenuBar" name="menuBar">
@@ -341,7 +1044,7 @@
    </property>
    <widget class="QMenu" name="menuFILE">
     <property name="title">
-     <string>FILE</string>
+     <string>File</string>
     </property>
     <addaction name="actionAdd_Project"/>
     <addaction name="actionOpen"/>
@@ -362,7 +1065,7 @@
   </widget>
   <action name="actionAdd_Project">
    <property name="text">
-    <string>new Project</string>
+    <string>New</string>
    </property>
   </action>
   <action name="actionclose">
@@ -402,6 +1105,8 @@
   </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources/>
+ <resources>
+  <include location="res.qrc"/>
+ </resources>
  <connections/>
 </ui>

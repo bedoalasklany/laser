@@ -1,0 +1,11 @@
+<RCC>
+    <qresource prefix="/">
+        <file>res/new.png</file>
+        <file>res/print.png</file>
+        <file>res/classify_error.png</file>
+        <file>res/classify_init.png</file>
+        <file>res/classify_ok.png</file>
+        <file>res/time.png</file>
+        <file>res/ok.png</file>
+    </qresource>
+</RCC>

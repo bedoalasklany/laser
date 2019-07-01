@@ -27,19 +27,30 @@ CONFIG += c++11
 
 SOURCES += \
         laser_file.cpp \
+        laser_project.cpp \
         main.cpp \
         mainwindow.cpp \
         mtime.cpp
 
 HEADERS += \
         laser_file.h \
+        laser_project.h \
         mainwindow.h \
         mtime.h
 
 FORMS += \
         mainwindow.ui
 
+include(C:\Users\m.ragab\Documents\laser\QtRptProject\QtRPT\QtRPT.pri)
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+RESOURCES += \
+    res.qrc
+
+DISTFILES +=
+
+
+

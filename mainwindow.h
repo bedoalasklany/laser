@@ -39,6 +39,12 @@ private slots:
 
     void on_thick_list_itemPressed(QListWidgetItem *item);
 
+    void on_pushButton_4_clicked();
+
+    void onProcessStarted();
+    void onProcessFinished();
+    void onProgressValueChanged(int progressValue);
+    void onProgressMaxChanged(int progressMax);
 private:
     Ui::MainWindow *ui;
     QList<Laser_file*> file_list;

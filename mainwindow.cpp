@@ -12,10 +12,17 @@ MainWindow::MainWindow(QWidget *parent) :
     QStringList a={"Sheets","Time","Time-120%","Quantity"};
     ui->tableWidget->setColumnCount(4);
     ui->tableWidget->setHorizontalHeaderLabels(a);
-    ui->tableWidget->setColumnWidth(0,150);
+    ui->tableWidget->setColumnWidth(0,159);
     ui->tableWidget->setColumnWidth(1,150);
     ui->tableWidget->setColumnWidth(2,150);
     ui->tableWidget->setColumnWidth(3,120);
+    ui->pushButton_2->setEnabled(false);
+    ui->pushButton_3->setEnabled(false);
+
+        statusBar()->addPermanentWidget(ui->progressBar);
+        ui->progressBar->hide();
+
+
 }
 
 MainWindow::~MainWindow()
@@ -25,6 +32,9 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButton_clicked()
 {
+    ui->pushButton_2->setEnabled(false);
+    ui->pushButton_3->setEnabled(false);
+
   openDir();
 }
 void MainWindow::openDir()
@@ -37,6 +47,8 @@ void MainWindow::openDir()
   {
     //qDebug()<< dirname;
   }
+  else
+      return;
 
    QDirModel *model = new QDirModel(this);
    QString home_files = dirname;
@@ -244,6 +256,10 @@ void MainWindow::on_thick_list_itemPressed(QListWidgetItem *item)
         ui->tableWidget->setItem(row,1,new QTableWidgetItem((*j)->total_time.toString()));
         ui->tableWidget->setItem(row,2,new QTableWidgetItem((*j)->time_120.toString()));
         ui->tableWidget->setItem(row,3,new QTableWidgetItem(QString::number((*j)->count)));
+       /* ui->tableWidget->takeItem(row,0)->setTextAlignment( Qt:: AlignCenter);
+        ui->tableWidget->takeItem(row,1)->setTextAlignment( Qt:: AlignCenter);
+        ui->tableWidget->takeItem(row,2)->setTextAlignment( Qt:: AlignCenter);
+        ui->tableWidget->takeItem(row,3)->setTextAlignment(Qt:: AlignCenter);*/
         row++;
 
     }
@@ -380,43 +396,36 @@ return
 
 
 
+void MainWindow::on_pushButton_4_clicked()
+{
+    if(!ui->proj_name_edit->text().isEmpty())
+    {
+    ui->pushButton_2->setEnabled(true);
+    ui->pushButton_3->setEnabled(true);
+    }
+}
 
 
 
 
 
 
+void MainWindow::onProcessStarted()
+{
+    ui->progressBar->show();
+}
 
+void MainWindow::onProcessFinished()
+{
+     ui->progressBar->hide();
+}
 
+void MainWindow::onProgressValueChanged(int progressValue)
+{
+     ui->progressBar->setValue(progressValue);
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+void MainWindow::onProgressMaxChanged(int progressMax)
+{
+     ui->progressBar->setMaximum(progressMax);
+}
