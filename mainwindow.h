@@ -15,6 +15,7 @@
 #include <QListWidgetItem>
 #include <mtime.h>
 #include <QtSql>
+#include <sqlserver.h>
 
 namespace Ui {
 class MainWindow;

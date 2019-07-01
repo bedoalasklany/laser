@@ -30,18 +30,20 @@ SOURCES += \
         laser_project.cpp \
         main.cpp \
         mainwindow.cpp \
-        mtime.cpp
+        mtime.cpp \
+        sqlserver.cpp
 
 HEADERS += \
         laser_file.h \
         laser_project.h \
         mainwindow.h \
-        mtime.h
+        mtime.h \
+        sqlserver.h
 
 FORMS += \
         mainwindow.ui
 
-include(C:\Users\m.ragab\Documents\laser\QtRptProject\QtRPT\QtRPT.pri)
+
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin

@@ -22,6 +22,9 @@ MainWindow::MainWindow(QWidget *parent) :
         statusBar()->addPermanentWidget(ui->progressBar);
         ui->progressBar->hide();
 
+        sqlserver sql;
+sql.connect();
+
 
 }
 
