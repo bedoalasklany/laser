@@ -11,7 +11,7 @@ bool sqlserver::connect()
   {
         QString connectionTemplate = "DRIVER={SQL SERVER};SERVER=%1;DATABASE=%2;PORT=%3";
 
-        QString connectionString = connectionTemplate.arg("123.0.0.11").arg("laser_managment").arg("1430");
+        QString connectionString = connectionTemplate.arg("127.0.0.11").arg("laser_managment").arg("1430");
         QSqlDatabase db = QSqlDatabase::addDatabase("QODBC");
 
         db.setDatabaseName(connectionString);
